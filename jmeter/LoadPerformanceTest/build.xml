@@ -1,0 +1,70 @@
+<project default="all">
+  <!-- Define an environment variable pointing to JMETER folder or change this -->
+  <property environment="env"/>
+  <property name="jmeter-home" location="${env.JMETER_HOME}"/>
+  <property file="build.properties" /> 
+  <property name="ant-contrib.jar" location="${env.ANT_HOME}/lib/ant-contrib-1.0b3.jar" />  
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${ant-contrib.jar}" />
+
+  <!-- ant-jmeter.jar comes with jmeter, be sure this is the release you have -->
+  <path id="ant.jmeter.classpath">
+    <pathelement
+       location="${jmeter-home}/extras/ant-jmeter-1.1.1.jar" />
+  </path>
+
+  <tstamp prefix="run_time">
+        <format property="day" pattern="yyyy-MM-dd"/>
+        <format property="time" pattern="HH:mm:ss"/>
+        <format property="dt" pattern="yyyyMMddHHmmss"/>
+  </tstamp>
+
+  <taskdef
+    name="jmeter"
+    classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask"
+    classpathref="ant.jmeter.classpath" />
+
+  <target name="clean">
+    <!--delete dir="results"/>
+    <delete file="jmeter.log"/>
+    <mkdir dir="results/jtl"/>
+    <mkdir dir="results/html"/>
+    <mkdir dir="results/log"/-->
+  </target>
+
+  <target name="runscript">
+    <delete dir="results/${script.file.name}_${run_time.day}"/>
+    <mkdir dir="results/${script.file.name}_${run_time.day}"/>
+    <jmeter
+       jmeterhome="${jmeter-home}"
+       resultlog="results/${script.file.name}_${run_time.day}/${script.file.name}.jtl"
+       jmeterlogfile="results/${script.file.name}_${run_time.day}/${script.file.name}.log"
+       failureproperty="true">
+      <testplans dir="scripts" includes="${script.file.name}.jmx"/>
+    </jmeter>
+  </target>
+
+  <target name="test" depends="clean">
+    <!--jmeter
+       jmeterhome="${jmeter-home}"
+       resultlog="results/jtl/ConcurrentUsersTest_ProjectCleanup_${run_time.day}.jtl"
+       jmeterlogfile="results/log/ConcurrentUsersTest_ProjectCleanup_${run_time.day}.log"
+       failureproperty="true">
+      <testplans dir="scripts" includes="ConcurrentUsersTest_ProjectCleanup.jmx"/>
+    </jmeter-->
+    <foreach list="${running_scripts}" target="runscript" param="script.file.name" delimiter=","/>
+    <foreach list="${running_scripts}" target="report" param="script.file.name" delimiter=","/>  
+  </target>
+
+  <!-- This is not needed for the plugin, but it produces a nice html report
+       which can be saved usin hudson's archive artifact feature -->
+  <target name="report">
+    <xslt
+       basedir="results/${script.file.name}_${run_time.day}"
+       destdir="results/${script.file.name}_${run_time.day}"
+       includes="*.jtl"
+       style="${jmeter-home}/extras/jmeter-results-detail-report_21.xsl"/>
+  </target>
+
+  <target name="all" depends="test"/>
+
+</project>

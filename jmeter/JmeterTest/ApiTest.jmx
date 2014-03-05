@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Restful Agent API LoadTest" enabled="true">
+      <stringProp name="TestPlan.comments">login, update, logout</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Configuration" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="USERS" elementType="Argument">
+            <stringProp name="Argument.name">USERS</stringProp>
+            <stringProp name="Argument.value">5</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="UPDATE_NUM" elementType="Argument">
+            <stringProp name="Argument.name">UPDATE_NUM</stringProp>
+            <stringProp name="Argument.value">5</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">10.32.88.71</stringProp>
+        <stringProp name="HTTPSampler.port">8080</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+        <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.implementation">Java</stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${USERS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1337742843000</longProp>
+        <longProp name="ThreadGroup.end_time">1337742843000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Agent Login" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;token&quot;:&quot;r+ySmijHHlBIMALcm7IsX322RXy5qYg77X86+X+R99tKY2Px3FiOSIKs1BwLA3Hs3lRXwn3vRuHfHuaCQqihCt6picQyBBiDF+8VZFPbTJ3l6up4mdkFtesaOu9XdDYq&quot;, &quot;timeout&quot;:1800, &quot;attributes&quot;:{}, &quot;user&quot;:{&quot;ID&quot;:&quot;someone&quot;}, &quot;content&quot;:&quot;null&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/rest/agent/login</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1352007138">&quot;status&quot;:&quot;200 OK&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">login_token</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;token&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="First Update" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;token&quot;: &quot;${login_token}&quot;, &quot;timeout&quot;: 1800, &quot;attributes&quot;: {}, &quot;user&quot;: {  &quot;ID&quot;: &quot;someone&quot;     },     &quot;content&quot;: &quot;{\&quot;user\&quot;:\&quot;bin\&quot;, \&quot;bonus\&quot;:\&quot;12345\&quot;, \&quot;level\&quot;:\&quot;1\&quot;, \&quot;owner\&quot;:\&quot;Xiao Binbin 2\&quot;}&quot; }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/rest/agent/update</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">300</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1352007138">&quot;status&quot;:&quot;200 OK&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">update_token</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;token&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Update Loop" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${UPDATE_NUM}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="LoopCounter" enabled="true">
+            <stringProp name="CounterConfig.start">1</stringProp>
+            <stringProp name="CounterConfig.end">${UPDATE_NUM}</stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">LoopCounter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Agent Update" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{     &quot;token&quot;: &quot;${update_token}&quot;,     &quot;timeout&quot;: 1800,     &quot;attributes&quot;: {},     &quot;user&quot;: {         &quot;ID&quot;: &quot;someone&quot;     },     &quot;content&quot;: &quot;{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;beta.cetas.net, feed3.cetas.net, ops.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:22,\&quot;Service\&quot;:\&quot;SSH\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Service Upgrades, Service Diagnostics\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network &amp; Signed up Customer Locations\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;insights.cetas.net, beta.cetas.net, ops.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:443,\&quot;Service\&quot;:\&quot;HTTPS\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Customer Access to Service\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;beta.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:2181,\&quot;Service\&quot;:\&quot;ZooKeeper\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Zookeeper service status/debug port\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network &amp; Customer Data Source IP\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;feed3.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:35872,\&quot;Service\&quot;:\&quot;Flume Config\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Cetasbox on customer location to get its config\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network &amp; Customer Data Source IP\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;feed3.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:35862,\&quot;Service\&quot;:\&quot;Flume Status\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Cetasbox agent to probe service readiness\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;feed3.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:35871,\&quot;Service\&quot;:\&quot;Flume Status\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Checking flume service on browser - only from internal network\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Customer Data Source IP\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;feed3.cetas.net\&quot;,\&quot;Target Port# / Range\&quot;:\&quot;14000-24000\&quot;,\&quot;Service\&quot;:\&quot;Live Feeds\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Required number is as many as customers need; Each port allocated to a specific customer registration for a specific purpose. One customer may do more than one. Data is pumped as streams to the allocated port in this range; We need to access them for monitoring and debugging\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;107.21.24.31\&quot;,\&quot;Target Port# / Range\&quot;:8983,\&quot;Service\&quot;:\&quot;Solr Status\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Debug port only between AWS and internal network\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Dynamic\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;107.21.25.10\&quot;,\&quot;Target Port# / Range\&quot;:8161,\&quot;Service\&quot;:\&quot;AMQ Status\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Out\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;Debug port only between AWS and internal network\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Skype1\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;Skype P2P\&quot;,\&quot;Target Port# / Range\&quot;:\&quot;Skype Messenger\&quot;,\&quot;Service\&quot;:\&quot;Chat messenger\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Both\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;internal communication among employees and Cetas consultants\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Skype2\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;Skype P2P\&quot;,\&quot;Target Port# / Range\&quot;:\&quot;Skype Messenger\&quot;,\&quot;Service\&quot;:\&quot;Chat messenger\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Both\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;internal communication among employees and Cetas consultants\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Skype3\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;Skype P2P\&quot;,\&quot;Target Port# / Range\&quot;:\&quot;Skype Messenger\&quot;,\&quot;Service\&quot;:\&quot;Chat messenger\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Both\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;internal communication among employees and Cetas consultants\&quot;}\n{\&quot;Source IP\&quot;:\&quot;Internal Network\&quot;,\&quot;Source Port\&quot;:\&quot;Skype4\&quot;,\&quot;Servers DNS/IP\&quot;:\&quot;Skype P2P\&quot;,\&quot;Target Port# / Range\&quot;:\&quot;Skype Messenger\&quot;,\&quot;Service\&quot;:\&quot;Chat messenger\&quot;,\&quot;Protocol\&quot;:\&quot;TCP\&quot;,\&quot;NAT required\&quot;:\&quot;No\&quot;,\&quot;Incoming / Outgoing\&quot;:\&quot;Both\&quot;,\&quot;Detailed Purpose\&quot;:\&quot;internal communication among employees and Cetas consultants\&quot;}&quot; }</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/rest/agent/update</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">300</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="1352007138">&quot;status&quot;:&quot;200 OK&quot;</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">update_token</stringProp>
+              <stringProp name="RegexExtractor.regex">&quot;token&quot;:&quot;(.+?)&quot;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">1</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Agent Logout" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;token&quot;:&quot;${update_token}&quot;, &quot;timeout&quot;:1800, &quot;attributes&quot;:{}, &quot;user&quot;:{&quot;ID&quot;:&quot;someone&quot;}, &quot;content&quot;:&quot;null&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/rest/agent/logout</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1352007138">&quot;status&quot;:&quot;200 OK&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>true</responseData>
+            <samplerData>false</samplerData>
+            <xml>true</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>true</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename">view_results.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>true</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename">summary_report.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>true</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename">aggregate_report.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
