@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Crawl data from web" data-provider-thread-count="1" preserve-order="true">
+       
+    <test name="CrawlM58921" preserve-order="true" parallel="false" enabled="true">
+        <classes>
+            <class name="com.pivotal.CrawlM58921">
+            </class>
+        </classes>
+    </test>
+</suite>
