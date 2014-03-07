@@ -2,10 +2,18 @@
 
 <suite name="Crawl data from web" data-provider-thread-count="1" preserve-order="true">
        
-    <test name="CrawlM58921" preserve-order="true" parallel="false" enabled="true">
+    <test name="CrawlM58921" preserve-order="true" parallel="false" enabled="false">
         <classes>
             <class name="com.pivotal.CrawlM58921">
             </class>
         </classes>
     </test>
+
+    <test name="Crawl Search Result from Google" preserve-order="true" parallel="false" enabled="true">
+        <classes>
+            <class name="com.pivotal.CrawlSearchResult">
+            </class>
+        </classes>
+    </test>
+
 </suite>

@@ -2,9 +2,12 @@
 package core;
 
 //import org.apache.log4j.Logger;
+import com.sun.tools.javac.code.Type;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -74,8 +77,12 @@ public class BrowserLauncher {
 	private static WebDriver getWebDriver(Constants.BROWSERTYPE browserType) {
 	    WebDriver d= null; 
 		switch (browserType) {
-	        case FIREFOX: 
-	        	d = new FirefoxDriver();
+	        case FIREFOX:
+                FirefoxProfile firefoxProfile=new FirefoxProfile();
+                firefoxProfile.setPreference("network.proxy.type",1);
+                firefoxProfile.setPreference("network.proxy.http","http://proxy.vmware.com");
+                firefoxProfile.setPreference("network.proxy.http_port","3128");
+	        	d = new FirefoxDriver(firefoxProfile);
 	        	break;
 	            
 	        case IE:
@@ -92,14 +99,19 @@ public class BrowserLauncher {
 	        		else 
 	        			chromeDriverPath = buildTop + "/tools/chromedriver.exe";
 	    			service = new ChromeDriverService.Builder()
-	    	        .usingChromeDriverExecutable(new File(chromeDriverPath))
-	    	        .usingAnyFreePort()
-	    	        .build();
+	    	            .usingDriverExecutable(new File(chromeDriverPath))
+	    	            .usingAnyFreePort()
+	    	            .build();
 	    			service.start();
+
 	    			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 	    			capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
-	    			//"--ignore-certificate-errors"
-	    			d = new RemoteWebDriver(service.getUrl(), capabilities);	
+
+                    Proxy proxy = new Proxy();
+                    proxy.setHttpProxy("http://proxy.vmware.com:3128");
+                    capabilities.setCapability("proxy", proxy);
+
+	    			d = new RemoteWebDriver(service.getUrl(), capabilities);
 	    			System.out.println("Create webdriver for chrome successfully!");
 	        	}catch (Exception e) {
 	        		System.err.println(e.getMessage());
